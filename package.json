@@ -1,0 +1,32 @@
+{
+  "name": "@apus/logger",
+  "version": "1.0.0",
+  "description": "Lightweight, unobtrusive, configurable，Support APP JavaScript logger",
+  "module": "dist/index.es.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "father build --esm --cjs --umd",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/apusjs/logger.git"
+  },
+  "keywords": [
+    "Lightweight",
+    "unobtrusive",
+    "configurable",
+    "APP",
+    "JavaScript",
+    "logger"
+  ],
+  "author": "aoxiang78 <ao_xiang@live.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apusjs/logger/issues"
+  },
+  "homepage": "https://github.com/apusjs/logger#readme",
+  "devDependencies": {
+    "father": "^2.30.1"
+  }
+}

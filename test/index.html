@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>log</title>
+    <script src="../dist/index.umd.js"></script>
+    <script>
+      logger.init({
+        spmId: 'myApp',  // 应用ID
+        imgUrl: 'https://api.apus.store/r.png?', // 当使用 fetch 自定义上报是，此方法可为空
+        // fetch: { method: 'HEAD' }, //  { method: 'HEAD' } || (src) => {}，上报方式,
+        // startTime: +new Date(), // 自定义测速类页面统计起始时间
+        sample: 1, // 抽样率，100 = 1%，1 = 100%，默认100
+        // report: true, // 是否上报 默认 true
+        // debug: false, // 是否打开调试模式  开启后： 上报率： 100
+      })
+      window.setTimeout(function () {
+        window.logger.custom(0, '/ss', 123)
+      },2000)
+
+      window.setTimeout(function () {
+        window.logger.setConfig({
+          spmId: 'mytest'
+        })
+        window.logger.custom(0, '/test', 123)
+      },3000)
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
