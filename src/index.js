@@ -70,25 +70,46 @@ const install = function (win, name) {
   exec()
 }
 
+
+const IsDebug = (conf) => {
+  const getQueryVariable = (variable) => {
+    const query = window.location.search.substring(1);
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return pair[1];
+      }
+    }
+    return undefined;
+  }
+  const url = getQueryVariable('wpodebug');
+  if (conf.debug || (url && url === '1')) {
+    conf.debug = true;
+    conf.sample = 1;
+  }
+  return conf
+}
+
 export default {
   init (conf, root) {
     const name = conf.name || 'logger'
     // 定义挂载对象 如空 使用 window
     if (!root) {
       install(window, name)
-      window[name].setConfig(conf)
+      window[name].setConfig(IsDebug(conf))
       return;
     }
-    // 定义挂载对象 不如空 且 window 环境，先初始化到window再挂载到自定义对象
+    // 定义挂载对象 不为空 且不等于 window 环境，初始化到自定义对象
     if (root && typeof window !== 'object') {
       install(root, name)
       root[name].setConfig(conf)
       return
     }
-    // 定义挂载对象 不如空 且不等于 window 环境，初始化到自定义对象
+    // 定义挂载对象 不为空 且 window 环境，先初始化到window再挂载到自定义对象
     if (root && typeof window === 'object') {
       install(window, name)
-      window[name].setConfig(conf)
+      window[name].setConfig(IsDebug(conf))
       root[name] = window[name]
       root[name].setConfig = window[name].setConfig
       return
